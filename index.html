@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braz Maurício Silva | Executivo em Tecnologia & IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #030407;
+            --bg-secondary: #0c0c10;
+            --bg-tertiary: #131318;
+            --bg-card: #1a1a22;
+            --bg-card-hover: #222230;
+            --text-primary: #f4f4f6;
+            --text-secondary: #9898a8;
+            --text-muted: #5c5c6e;
+            --accent: #fb923c;
+            --accent-soft: #fdba74;
+            --accent-glow: rgba(251, 146, 60, 0.25);
+            --accent-glow-strong: rgba(251, 146, 60, 0.4);
+            --accent-gradient: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --font-display: 'Sora', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Noise Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Glow Effects */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .glow-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            opacity: 0.6;
+        }
+
+        .glow-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(251, 146, 60, 0.1) 0%, transparent 70%);
+            bottom: 20%;
+            left: -100px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 0;
+            background: rgba(3, 4, 7, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.875rem;
+            color: var(--bg-primary);
+        }
+
+        .nav-logo-text {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-display);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow-strong);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge i {
+            font-size: 0.5rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .highlight {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .hero-avatar-wrapper {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .hero-avatar {
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--bg-primary);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 40px 80px -20px rgba(251, 146, 60, 0.5);
+        }
+
+        .hero-avatar-ring {
+            position: absolute;
+            inset: -20px;
+            border: 2px solid var(--accent);
+            border-radius: 36px;
+            opacity: 0.3;
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-avatar-ring::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-floating-card-1 {
+            top: 10%;
+            left: -20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-floating-card-2 {
+            bottom: 15%;
+            right: -10px;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+
+        .floating-card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(251, 146, 60, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .floating-card-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.125rem;
+        }
+
+        .floating-card-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-label i {
+            font-size: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* About Cards */
+        #sobre {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            transform: translateY(-8px);
+        }
+
+        .about-card-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(251, 146, 60, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 3rem 60px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-item:last-child .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .timeline-date {
+            background: rgba(251, 146, 60, 0.1);
+            color: var(--accent);
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .timeline-tasks {
+            list-style: none;
+        }
+
+        .timeline-tasks li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-tasks li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Skills Grid */
+        .skills-section {
+            background: var(--bg-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--accent);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .skill-value {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.125rem;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 3px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .education-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .education-info p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .education-badge {
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .education-badge.completed {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .education-badge.incomplete {
+            background: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+
+        .education-badge.current {
+            background: rgba(251, 146, 60, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+        }
+
+        /* Languages */
+        .languages-section {
+            background: var(--bg-secondary);
+        }
+
+        .languages-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .language-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .language-card:hover {
+            border-color: var(--accent);
+        }
+
+        .language-flag {
+            font-size: 1.5rem;
+        }
+
+        .language-name {
+            font-weight: 500;
+        }
+
+        .language-level {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Availability */
+        .availability-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .availability-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .availability-card:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .availability-card i {
+            color: var(--accent);
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .contact-card i {
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                padding-left: 30px;
+            }
+
+            .timeline-dot {
+                left: -9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Glow Orbs -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-logo">
+                <div class="nav-logo-icon">BM</div>
+                <span class="nav-logo-text">Braz Maurício</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="https://linkedin.com/in/bmauriciomori" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#contato" class="btn btn-primary">Fale Comigo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header>
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-circle"></i>
+                        Indaiatuba/SP
+                    </div>
+                    <h1 class="hero-title">
+                        Braz Maurício<br>
+                        <span class="highlight">Silva</span>
+                    </h1>
+                    <p class="hero-subtitle">Executivo em Tecnologia & IA</p>
+                    <p class="hero-description">
+                        25 anos de experiência em gestão, transformação digital e liderança de equipes. Foco atual em automações e desenvolvimento com inteligência artificial.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://linkedin.com/in/bmauriciomori" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                        <a href="mailto:mauricio@netwis.com.br" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Anos Exp</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Cidades</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Startups</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-avatar-wrapper">
+                        <div class="hero-avatar-ring"></div>
+                        <div class="hero-avatar">BM</div>
+                        <div class="hero-floating-card hero-floating-card-1">
+                            <div class="floating-card-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="floating-card-info">
+                                <h4>AI Solutions</h4>
+                                <p>Founder</p>
+                            </div>
+                        </div>
+                        <div class="hero-floating-card hero-floating-card-2">
+                            <div class="floating-card-icon">
+                                <i class="fas fa-signal"></i>
+                            </div>
+                            <div class="floating-card-info">
+                                <h4>Telecom</h4>
+                                <p>CEO - 25 anos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sobre -->
+        <section id="sobre">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Sobre
+                    </div>
+                    <h2 class="section-title">Executive com visão estratégica</h2>
+                    <p class="section-subtitle">25 anos de trajetória como CEO/DIRETOR no setor de Telecom</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Liderança Estratégica</h3>
+                        <p>Gestão lógica e estratégica de companhia, com operações em mais de 30 cidades da Região Metropolitana de Campinas.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Inovação com IA</h3>
+                        <p>Fundador de startup voltada à inteligência artificial, com ênfase em sistemas low-code e open source.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Liderança Inspiradora</h3>
+                        <p>Perfil agregador com foco em crescimento, inovação e liderança inspiradora. Alta capacidade analítica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiência -->
+        <section id="experiencia">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Carreira
+                    </div>
+                    <h2 class="section-title">Experiência Profissional</h2>
+                    <p class="section-subtitle">Trajetória de sucesso em tecnologia</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">CEO – Netwis Telecom</h3>
+                            <span class="timeline-date">25 anos</span>
+                        </div>
+                        <p class="timeline-company">Região Metropolitana de Campinas</p>
+                        <ul class="timeline-tasks">
+                            <li>Responsável pela gestão lógica e estratégica da companhia</li>
+                            <li>Implantação e manutenção de redes ópticas e enlaces PDH</li>
+                            <li>Liderança técnica e administrativa em mais de 30 cidades</li>
+                            <li>Tomada de decisão em cenários críticos</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Fundador – Startup de IA</h3>
+                            <span class="timeline-date">2023 – Atual</span>
+                        </div>
+                        <p class="timeline-company">Indaiatuba/SP</p>
+                        <ul class="timeline-tasks">
+                            <li>Idealização e estruturação de soluções em automações com IA</li>
+                            <li>Desenvolvimento com ferramentas low-code e open source</li>
+                            <li>Estudo contínuo das tendências emergentes e engenharia de prompts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habilidades -->
+        <section id="habilidades" class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Skills
+                    </div>
+                    <h2 class="section-title">Habilidades & Competências</h2>
+                    <p class="section-subtitle">Competências técnicas e gerenciais</p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Liderança inspiradora e gestão de times</span>
+                            <span class="skill-value">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Planejamento estratégico e gestão de crises</span>
+                            <span class="skill-value">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Inteligência artificial aplicada a negócios</span>
+                            <span class="skill-value">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Mentoria e formação de equipes técnicas</span>
+                            <span class="skill-value">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Automação de processos e transformação digital</span>
+                            <span class="skill-value">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formação -->
+        <section id="formacao">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Academia
+                    </div>
+                    <h2 class="section-title">Formação Acadêmica</h2>
+                    <p class="section-subtitle">Educação e desenvolvimento contínuo</p>
+                </div>
+                <div class="education-grid">
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Sistemas de Informação e Redes</h4>
+                            <p>Universidade Max Plank</p>
+                        </div>
+                        <span class="education-badge completed">Concluído</span>
+                    </div>
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Engenharia Elétrica</h4>
+                            <p>FEI – São Bernardo do Campo</p>
+                        </div>
+                        <span class="education-badge incomplete">Incompleto</span>
+                    </div>
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Ciências da Computação</h4>
+                            <p>UNISAL – Campinas</p>
+                        </div>
+                        <span class="education-badge incomplete">Incompleto</span>
+                    </div>
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Engenharia de Prompt com IA</h4>
+                            <p>Universidade EXAME</p>
+                        </div>
+                        <span class="education-badge completed">Concluído</span>
+                    </div>
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Pós-Graduação CyberSecurity</h4>
+                            <p>Faculdade Metropolitana</p>
+                        </div>
+                        <span class="education-badge completed">Concluído</span>
+                    </div>
+                    <div class="education-card">
+                        <div class="education-info">
+                            <h4>Python</h4>
+                            <p>Santander Open Academy</p>
+                        </div>
+                        <span class="education-badge current">Em curso</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Idiomas -->
+        <section id="idiomas" class="languages-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Languages
+                    </div>
+                    <h2 class="section-title">Idiomas</h2>
+                    <p class="section-subtitle">Competências multilíngues</p>
+                </div>
+                <div class="languages-grid">
+                    <div class="language-card">
+                        <span class="language-flag">🇺🇸</span>
+                        <span class="language-name">Inglês</span>
+                        <span class="language-level">Intermediário</span>
+                    </div>
+                    <div class="language-card">
+                        <span class="language-flag">🇮🇹</span>
+                        <span class="language-name">Italiano</span>
+                        <span class="language-level">Intermediário</span>
+                    </div>
+                    <div class="language-card">
+                        <span class="language-flag">🇪🇸</span>
+                        <span class="language-name">Espanhol</span>
+                        <span class="language-level">Intermediário</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disponibilidade -->
+        <section id="disponibilidade">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Work Mode
+                    </div>
+                    <h2 class="section-title">Disponibilidade</h2>
+                    <p class="section-subtitle">Modalidades de trabalho</p>
+                </div>
+                <div class="availability-grid">
+                    <div class="availability-card">
+                        <i class="fas fa-laptop-house"></i>
+                        <span>Trabalho Remoto</span>
+                    </div>
+                    <div class="availability-card">
+                        <i class="fas fa-house-user"></i>
+                        <span>Trabalho Híbrido</span>
+                    </div>
+                    <div class="availability-card">
+                        <i class="fas fa-building"></i>
+                        <span>Trabalho Presencial</span>
+                    </div>
+                    <div class="availability-card">
+                        <i class="fas fa-globe"></i>
+                        <span>Projetos Internacionais</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">
+                        <i class="fas fa-circle"></i>
+                        Contato
+                    </div>
+                    <h2 class="section-title">Vamos Conversar?</h2>
+                    <p class="section-subtitle">Entre em contato para oportunidades</p>
+                </div>
+                <div class="contact-cards">
+                    <a href="tel:+5519992453368" class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <span>+55 19 99245-3368</span>
+                    </a>
+                    <a href="mailto:mauricio@netwis.com.br" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <span>mauricio@netwis.com.br</span>
+                    </a>
+                    <a href="https://linkedin.com/in/bmauriciomori" target="_blank" class="contact-card">
+                        <i class="fab fa-linkedin"></i>
+                        <span>@bmauriciomori</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 – Braz Maurício Silva · "Innovating with AI & Strategic Leadership"</p>
+        </div>
+    </footer>
+</body>
+</html>

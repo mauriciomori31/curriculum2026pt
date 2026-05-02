@@ -1,13 +1,8 @@
 {
+  "build": {
+    "output": "public"
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/landing/landing.html" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
