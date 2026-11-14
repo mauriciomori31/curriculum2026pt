@@ -9,10 +9,13 @@ Personal curriculum/landing page for Braz Maurício Silva (Executivo em Tecnolog
 | File | Purpose |
 |------|---------|
 | `index.html` | Main landing page (deployed to Vercel) |
+| `nutri.html` | Apresentação personalizada para o Grupo Nutri (Food Service & Operações) |
 | `landing/landing.html` | Backup version |
 | `curriculum/curriculum.html` | Spanish version |
 | `curriculum-braz-mauricio.pdf` | PDF export |
+| `curriculum-nutri-braz-mauricio.pdf` | PDF export para o Grupo Nutri |
 | `html_to_pdf.py` | PDF generator script |
+| `html_to_pdf_nutri.py` | PDF generator script para a página Nutri |
 
 ## Developer Commands
 
